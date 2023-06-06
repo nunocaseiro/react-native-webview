@@ -1060,6 +1060,16 @@ RCTAutoInsetsProtocol>
       return;
     }
   }
+
+  if ([[challenge protectionSpace] authenticationMethod] == NSURLAuthenticationMethodNTLM) {
+        NSString *username = [_basicAuthCredential valueForKey:@"username"];
+        NSString *password = [_basicAuthCredential valueForKey:@"password"];
+        RCTLogWarn(username);
+        NSURLCredential *credential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
+        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+        return;
+  } 
+
   completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
 }
 
