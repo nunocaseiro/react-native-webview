@@ -1062,24 +1062,18 @@ RCTAutoInsetsProtocol>
   }
 
     if ([[challenge protectionSpace] authenticationMethod] == NSURLAuthenticationMethodNTLM) {
-        
-         if ([challenge previousFailureCount] > 0)  { 
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Credentials" 
-                                                            message:@"The credentials you saved for your account are invalid." 
-                                                           delegate:nil 
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil]; 
-
-            [alert show]; 
-         } else {
-          NSString *username = [_basicAuthCredential valueForKey:@"username"];
-          NSString *password = [_basicAuthCredential valueForKey:@"password"];
-          if (username && password) {
-            NSURLCredential *credential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
-            completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
-            return;
-          }
-         }
+      if ([challenge previousFailureCount] > 0)  { 
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Invalid Credentials" message:@"The credentials you saved for your account are invalid." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]; 
+        [alert show]; 
+      } else {
+        NSString *username = [_basicAuthCredential valueForKey:@"username"];
+        NSString *password = [_basicAuthCredential valueForKey:@"password"];
+        if (username && password) {
+          NSURLCredential *credential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceNone];
+          completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+          return;
+        }
+      }
   } 
 
   completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
