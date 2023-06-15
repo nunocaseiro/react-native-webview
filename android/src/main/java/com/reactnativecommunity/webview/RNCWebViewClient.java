@@ -13,7 +13,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -144,8 +143,6 @@ public class RNCWebViewClient extends WebViewClient {
     @Override
     public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
         if (basicAuthCredential != null) {
-            String message = "" + basicAuthCredential.username + " " + basicAuthCredential.password;
-            Toast.makeText(view.getContext().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             handler.proceed(basicAuthCredential.username, basicAuthCredential.password);
             return;
         }
