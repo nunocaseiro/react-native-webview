@@ -144,7 +144,7 @@ public class RNCWebViewClient extends WebViewClient {
     public void onReceivedHttpAuthRequest(WebView view, HttpAuthHandler handler, String host, String realm) {
         if (basicAuthCredential != null) {
             String message = "" + basicAuthCredential.username + " " + basicAuthCredential.password;
-            showToast(view.getContext(), message);
+            Toast.makeText(view.getContext(), message, Toast.LENGTH_LONG).show();
             handler.proceed(basicAuthCredential.username, basicAuthCredential.password);
             return;
         }
