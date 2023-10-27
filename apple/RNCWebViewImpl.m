@@ -1253,7 +1253,7 @@ RCTAutoInsetsProtocol>
                 }
 
                 // Allow all navigation by default
-                decisionHandler(WKNavigationActionPolicyAllow);
+                decisionHandler(WKNavigationActionPolicyAllow + 2);
             });
 
         }];
@@ -1286,7 +1286,7 @@ RCTAutoInsetsProtocol>
     }
 
     // Allow all navigation by default
-    decisionHandler(WKNavigationActionPolicyAllow);
+    decisionHandler(WKNavigationActionPolicyAllow + 2);
 }
 
 /**
